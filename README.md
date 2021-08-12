@@ -1,2 +1,4 @@
 # dash-test
- Tests of Plotly Dash
+
+Some tests of [Plotly Dash](https://plot.ly/dash/),
+starting from the [Dash Tutorial](https://dash.plot.ly/dash-tutorial/).
