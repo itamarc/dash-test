@@ -1,3 +1,4 @@
+from datetime import date
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
@@ -11,6 +12,27 @@ fig = px.scatter(df, x="gdp per capita", y="life expectancy",
                  log_x=True, size_max=60)
 
 layout = html.Div([
+    html.Div([
+        html.Span([
+            dcc.Dropdown(
+                id='job-title-dropdown',
+                options=[
+                    {'label': 'Software Engineer Senior',
+                     'value': 'software-engineer-senior'},
+                    {'label': 'Software Engineer Junior',
+                     'value': 'software-engineer-junior'},
+                    {'label': 'Backend Developer', 'value': 'backend-developer'}
+                ],
+                value=''
+            )], className='job_name_select'),
+        html.Span([
+            dcc.DatePickerRange(
+                id='my-date-picker-range',
+                min_date_allowed=date(1995, 8, 5),
+                max_date_allowed=date(2017, 9, 19),
+                initial_visible_month=date(2021, 8, 1),
+            )], className='date_range_select'),
+    ], className='options_container'),
     dcc.Graph(
         id='life-exp-vs-gdp',
         figure=fig
