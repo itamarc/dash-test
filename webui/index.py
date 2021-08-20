@@ -4,29 +4,54 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 from app import app
-from apps import app0, app1, app2
+from apps import app0, app1, app2, app3, app4, app5
 
 app.title = 'Jobs Data Dashboard'
 
-app.layout = html.Div(children=[
+app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
-    html.H1(children='Jobs Data Dashboard'),
+    html.H1('Jobs Data Dashboard', id="h1test"),
     html.Div([
         dcc.Link('Home', href='/'),
-        dcc.Link('App 1', href='/app1'),
-        dcc.Link('App 2', href='/app2')
+        dcc.Link('Jobs by Location', href='/app1', id='job-loc'),
+        dcc.Link('Jobs by Title', href='/app2', id='job-tit'),
+        dcc.Link('Avg Salary by Location', href='/app3', id='sal-loc'),
+        dcc.Link('Avg Salary by Job Title', href='/app4', id='sal-tit'),
+        dcc.Link('Prevalent Jobs by Location', href='/app5', id='prev-loc')
     ], id='header'),
-
     html.Div(id='page-content'),
 
     html.Div([
-        "Made with Plotly Dash by",
+        "Made with ",
+        html.A("Plotly Dash",
+               href="https://plotly.com/dash/",
+               target="_blank"),
+        " by",
         html.A("Itamar Carvalho",
                href="http://github.com/itamarc",
-               target="_blank"),
-        "."
+               target="_blank")
     ], id='footer')
 ])
+
+# TODO: FIX THIS
+app.clientside_callback(
+    """
+    function set_current(pathname) {
+        map_buttons = {
+            '/app1': 'job-loc',
+            '/app2': 'job-tit',
+            '/app3': 'sal-loc',
+            '/app4': 'sal-tit',
+            '/app5': 'prev-loc'
+        };
+        document.getElementById(map_buttons[pathname]).className = 'current';
+        console.log(pathname + " : " + map_buttons[pathname]);
+        return "";
+    }
+    """,
+    Output('output-clientside', 'children'),
+    Input('url', 'pathname')
+)
 
 
 @app.callback(Output('page-content', 'children'),
@@ -38,6 +63,12 @@ def display_page(pathname):
         return app1.layout
     elif pathname == '/app2':
         return app2.layout
+    elif pathname == '/app3':
+        return app3.layout
+    elif pathname == '/app4':
+        return app4.layout
+    elif pathname == '/app5':
+        return app5.layout
     else:
         return '404'
 

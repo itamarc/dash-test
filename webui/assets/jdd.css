@@ -2,20 +2,44 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+h1 {
+    background-color: #69DAFF;
+    color: #005271;
+    border-radius: 10px 10px 0px 0px;
+    padding: 5px;
+    margin-bottom: 0px;
+}
+
 #header {
-    background-color: rgb(203, 242, 255);
+    background-color: #005271;
     width: 100%;
-    height: 2.5em;
+    min-height: 2.5em;
     display: flex;
     justify-content: left;
     align-items: center;
 }
 
 #header a {
-    border: 1px solid darkblue;
+    background-color: #69DAFF;
+    color: #005271;
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     border-radius: 5px;
-    padding: 3px;
+    padding: 5px;
     margin: 5px;
+}
+
+#header a.current {
+    /* background-color: #994700;
+    color: #F69333; */
+    border: 2px solid #F69333;
+    padding: 3px;
+}
+
+
+#header a:hover {
+    background-color: #F69333;
+    color: #994700;
 }
 
 #page-content {
@@ -42,7 +66,7 @@ body {
     width: 100%;
     height: 4em;
     font-size: x-small;
-    background-color: rgb(203, 242, 255);
+    background-color: #69DAFF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,5 +74,6 @@ body {
 }
 
 #footer a {
-    margin-left: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 }

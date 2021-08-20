@@ -21,7 +21,8 @@ layout = html.Div([
                      'value': 'software-engineer-senior'},
                     {'label': 'Software Engineer Junior',
                      'value': 'software-engineer-junior'},
-                    {'label': 'Backend Developer', 'value': 'backend-developer'}
+                    {'label': 'Backend Developer',
+                     'value': 'backend-developer'}
                 ],
                 value=''
             )], className='job_name_select'),
