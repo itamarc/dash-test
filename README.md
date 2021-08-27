@@ -3,6 +3,10 @@
 Some tests of [Plotly Dash](https://plot.ly/dash/),
 starting from the [Dash Tutorial](https://dash.plot.ly/dash-tutorial/).
 
+## To run this app
+
+    python3 index.py
+
 ## To run with Docker:
 
     $ docker build -t dashtest .
