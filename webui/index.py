@@ -12,7 +12,7 @@ app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.H1('Jobs Data Dashboard', id="h1test"),
     html.Div([
-        dcc.Link('Home', href='/'),
+        dcc.Link('Home', href='/', id='home'),
         dcc.Link('Jobs by Location', href='/app1', id='job-loc'),
         dcc.Link('Jobs by Title', href='/app2', id='job-tit'),
         dcc.Link('Avg Salary by Location', href='/app3', id='sal-loc'),
@@ -30,7 +30,8 @@ app.layout = html.Div([
         html.A("Itamar Carvalho",
                href="http://github.com/itamarc",
                target="_blank")
-    ], id='footer')
+    ], id='footer'),
+    html.Span(id='output-clientside')
 ])
 
 # TODO: FIX THIS
@@ -38,14 +39,21 @@ app.clientside_callback(
     """
     function set_current(pathname) {
         map_buttons = {
+            '/': 'home',
             '/app1': 'job-loc',
             '/app2': 'job-tit',
             '/app3': 'sal-loc',
             '/app4': 'sal-tit',
             '/app5': 'prev-loc'
         };
-        document.getElementById(map_buttons[pathname]).className = 'current';
-        console.log(pathname + " : " + map_buttons[pathname]);
+        for (var k in map_buttons) {
+            if (k == pathname) {
+                document.getElementById(
+                    map_buttons[pathname]).className = 'current';
+            } else {
+                document.getElementById(map_buttons[k]).className = 'notcurr';
+            }
+        }
         return "";
     }
     """,
