@@ -1,15 +1,20 @@
 from datetime import date
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly.express as px
-import pandas as pd
+import plotly.graph_objects as go
+import data_source as ds
 
-df = pd.read_csv(
-    'https://gist.githubusercontent.com/chriddyp/5d1ea79569ed194d432e56108a04d188/raw/a9f9e8076b837d541398e999dcbac2b2826a81f8/gdp-life-exp-2007.csv')
+data = ds.get_jobs_by_location()
 
-fig = px.scatter(df, x="gdp per capita", y="life expectancy",
-                 size="population", color="continent", hover_name="country",
-                 log_x=True, size_max=60)
+fig = go.Figure(go.Scattergeo())
+fig.update_geos(
+    visible=False, resolution=110, scope="europe",
+    showcountries=True, countrycolor="Black",
+    showsubunits=True, subunitcolor="Blue",
+    showland=True, landcolor="khaki",
+    showocean=True, oceancolor="LightBlue"
+)
+fig.update_layout(height=500, margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 layout = html.Div([
     html.Div([
@@ -35,7 +40,7 @@ layout = html.Div([
             )], className='date_range_select'),
     ], className='options_container'),
     dcc.Graph(
-        id='life-exp-vs-gdp',
+        id='jobs-by-location',
         figure=fig
     )
 ])

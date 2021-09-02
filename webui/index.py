@@ -4,7 +4,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 from app import app
-from apps import app0, app1, app2, app3, app4, app5
+from apps import home, job_loc, job_tit, sal_loc, sal_tit, prev_loc
 
 app.title = 'Jobs Data Dashboard'
 
@@ -13,11 +13,11 @@ app.layout = html.Div([
     html.H1('Jobs Data Dashboard', id="h1test"),
     html.Div([
         dcc.Link('Home', href='/', id='home'),
-        dcc.Link('Jobs by Location', href='/app1', id='job-loc'),
-        dcc.Link('Jobs by Title', href='/app2', id='job-tit'),
-        dcc.Link('Avg Salary by Location', href='/app3', id='sal-loc'),
-        dcc.Link('Avg Salary by Job Title', href='/app4', id='sal-tit'),
-        dcc.Link('Prevalent Jobs by Location', href='/app5', id='prev-loc')
+        dcc.Link('Jobs by Location', href='/job_loc', id='job-loc'),
+        dcc.Link('Jobs by Title', href='/job_tit', id='job-tit'),
+        dcc.Link('Avg Salary by Location', href='/sal_loc', id='sal-loc'),
+        dcc.Link('Avg Salary by Job Title', href='/sal_tit', id='sal-tit'),
+        dcc.Link('Prevalent Jobs by Location', href='/prev_loc', id='prev-loc')
     ], id='header'),
     html.Div(id='page-content'),
 
@@ -40,16 +40,15 @@ app.clientside_callback(
     function set_current(pathname) {
         map_buttons = {
             '/': 'home',
-            '/app1': 'job-loc',
-            '/app2': 'job-tit',
-            '/app3': 'sal-loc',
-            '/app4': 'sal-tit',
-            '/app5': 'prev-loc'
+            '/job_loc': 'job-loc',
+            '/job_tit': 'job-tit',
+            '/sal_loc': 'sal-loc',
+            '/sal_tit': 'sal-tit',
+            '/prev_loc': 'prev-loc'
         };
         for (var k in map_buttons) {
             if (k == pathname) {
-                document.getElementById(
-                    map_buttons[pathname]).className = 'current';
+                document.getElementById(map_buttons[k]).className = 'current';
             } else {
                 document.getElementById(map_buttons[k]).className = 'notcurr';
             }
@@ -66,17 +65,18 @@ app.clientside_callback(
               Input('url', 'pathname'))
 def display_page(pathname):
     if pathname == '/':
-        return app0.layout
-    elif pathname == '/app1':
-        return app1.layout
-    elif pathname == '/app2':
-        return app2.layout
-    elif pathname == '/app3':
-        return app3.layout
-    elif pathname == '/app4':
-        return app4.layout
-    elif pathname == '/app5':
-        return app5.layout
+        return home.layout
+    elif pathname == '/job_loc':
+        return job_loc.layout
+    elif pathname == '/job_tit':
+        return job_tit.layout
+    elif pathname == '/sal_loc':
+        return sal_loc.layout
+    elif pathname == '/sal_tit':
+        return sal_tit.layout
+    elif pathname == '/prev_loc':
+        return prev_loc.layout
+
     else:
         return '404'
 
