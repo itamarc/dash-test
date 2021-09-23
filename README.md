@@ -14,3 +14,8 @@ starting from the [Dash Tutorial](https://dash.plot.ly/dash-tutorial/).
     $ docker run -p 8050:8050 dashtest:latest
 
 Access http://localhost:8050
+
+## Useful links
+
+https://ngageoint.github.io/geopackage-js/
+https://sqlitebrowser.org/dl/
